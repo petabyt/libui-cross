@@ -1,6 +1,13 @@
-# libui-cross
-Prebuilt binaries for cross-compiling software using libui.
-Builds will contain a few experimental extensions.
+# libui-dev
+A portable UI library written in C, which uses the native UI of the operating system it runs on.  
+Like wxWidgets, but in C. And much more bare-bones.
+
+This is a fork of libui-ng with some extras:
+- [x] uiScroll
+- [x] uiWindowSetIcon
+- [x] DPI scaling (4k)
+- [ ] uiImage as a widget
+- [ ] Tooltips
 
 ```
 # Compile for MinGW from Linux
