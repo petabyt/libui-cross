@@ -8,6 +8,9 @@
 
 #include "demo.h"
 
+// Libui playground
+// TODO: Live open - open file, open the file in another editor (remove the textarea) and reload from that file.
+
 extern int luaopen_libuilua(lua_State *L);
 static uiWindow *mainwin;
 static uiMultilineEntry *editor;
@@ -58,7 +61,10 @@ static void run_script_clicked(uiMenuItem *item, uiWindow *w, void *data) {
 	luaL_requiref(L, "ui", luaopen_libuilua, 1);
 	luaopen_base(L);
 
-	luaL_dostring(L, text);
+	if (luaL_dostring(L, text)) {
+		uiMsgBox(w, "Lua Error", lua_tostring(L, -1));
+		lua_pop(L, 1);
+	}
 }
 
 #include "favicon.h"
@@ -98,7 +104,6 @@ int main() {
 	item = uiMenuAppendQuitItem(menu);
 
 	menu = uiNewMenu("Script");
-	uiMenuAppendSeparator(menu);
 	item = uiMenuAppendItem(menu, "Run");
 	uiMenuItemOnClicked(item, run_script_clicked, NULL);
 
@@ -110,7 +115,7 @@ int main() {
 
 	uiWindowSetIcon(mainwin, libui_ico, libui_ico_len);
 
-	uiWindowSetMargined(mainwin, 1);
+	uiWindowSetMargined(mainwin, 0);
 	uiWindowOnClosing(mainwin, onClosing, NULL);
 	uiOnShouldQuit(onShouldQuit, mainwin);
 

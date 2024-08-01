@@ -41,19 +41,6 @@ install: libui.so
 	sudo cp libui.so /usr/lib/libui.so
 	sudo cp $(LIBUI)/ui.h /usr/include/ui.h
 
-ex.out: example/main.c libui.so
-	$(CC) $(CFLAGS) example/main.c -L. -Wl,-rpath,. -lui -o ex.out
-
-ide.out: ide/libuilua.c ide/test.c
-	$(CC) ide/libuilua.c ide/test.c -lui -ldl $(shell pkg-config --libs --cflags lua-5.3) -o ide.out
-
-const.out: const/const.c const/json.c
-	$(CC) const/const.c const/json.c -lui -ldl -o const.out
-
-ide.AppImage:
-	linuxdeploy --appdir=AppDir --executable=ide.out -d ide/ide.desktop -i ide/libui.png
-	appimagetool AppDir
-
 endif # ------------------------------------
 
 ifeq ($(TARGET),m) # ++++++++++++++++++++++++++
@@ -70,8 +57,10 @@ LDFLAGS := -framework Foundation -framework Appkit -framework CoreText -framewor
 libui.dylib: $(O_FILES)
 	$(CC) -shared $(O_FILES) $(LDFLAGS) -o libui.dylib
 
-ex.out:
-	$(CC) $(CFLAGS) example/main.c -L. -lui -o ex.out
+define COMPILE
+$(2).out: $(1) libui.dylib
+	$(CC) $(CFLAGS) $(1) -L. -lui -o $(2).out
+endef
 
 install: libui.dylib
 	cp libui.dylib /usr/local/lib

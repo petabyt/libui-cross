@@ -30,23 +30,16 @@ static uiControl *makeBasicControlsPage(void)
 	uiBoxSetPadded(hbox, 1);
 	uiBoxAppend(vbox, uiControl(hbox), 0);
 
-	uiButton* button = uiNewButton("Button");
 	uiBoxAppend(hbox,
-		uiControl(button),
+		uiControl(uiNewButton("Button")),
 		0);
-	uiControlSetTooltip(button, "Button");
-
-	uiCheckbox *check = uiNewCheckbox("Checkbox");
 	uiBoxAppend(hbox,
-		uiControl(check),
+		uiControl(uiNewCheckbox("Checkbox")),
 		0);
-	uiControlSetTooltip(check, "Checkbox");
 
-	uiLabel *label = uiNewLabel("This is a label.\nLabels can span multiple lines.");
 	uiBoxAppend(vbox,
-		uiControl(label),
+		uiControl(uiNewLabel("This is a label.\nLabels can span multiple lines.")),
 		0);
-	uiControlSetTooltip(label, "This is a label.\nLabels can span multiple lines.");
 
 	uiBoxAppend(vbox,
 		uiControl(uiNewHorizontalSeparator()),
@@ -60,40 +53,26 @@ static uiControl *makeBasicControlsPage(void)
 	uiFormSetPadded(entryForm, 1);
 	uiGroupSetChild(group, uiControl(entryForm));
 
-	uiEntry *entry = uiControl(uiNewEntry());
 	uiFormAppend(entryForm,
 		"Entry",
-		entry,
+		uiControl(uiNewEntry()),
 		0);
-	uiControlSetTooltip(entry, "Entry");	
-
-	entry = uiControl(uiNewPasswordEntry());
 	uiFormAppend(entryForm,
 		"Password Entry",
-		entry,
+		uiControl(uiNewPasswordEntry()),
 		0);
-	uiControlSetTooltip(entry, "Password Entry");	
-
-	entry = uiControl(uiNewSearchEntry());
 	uiFormAppend(entryForm,
 		"Search Entry",
-		entry,
+		uiControl(uiNewSearchEntry()),
 		0);
-	uiControlSetTooltip(entry, "Search Entry");	
-
-	uiMultilineEntry *multi_entry = uiControl(uiNewMultilineEntry());
 	uiFormAppend(entryForm,
 		"Multiline Entry",
-		multi_entry,
+		uiControl(uiNewMultilineEntry()),
 		1);
-	uiControlSetTooltip(multi_entry, "Multilne Tooltip.\nThis line should be visible.");	
-
-	multi_entry = uiControl(uiNewNonWrappingMultilineEntry());
 	uiFormAppend(entryForm,
 		"Multiline Entry No Wrap",
-		multi_entry,
+		uiControl(uiNewNonWrappingMultilineEntry()),
 		1);
-	uiControlSetTooltip(multi_entry, "Multiline Entry No Wrap");	
 
 	return uiControl(vbox);
 }
@@ -137,11 +116,8 @@ static uiControl *makeNumbersPage()
 	uiGroupSetChild(group, uiControl(vbox));
 
 	spinbox = uiNewSpinbox(0, 100);
-	uiControlSetTooltip(spinbox, "Spinbox");
 	slider = uiNewSlider(0, 100);
-	uiControlSetTooltip(slider, "Slider");
 	pbar = uiNewProgressBar();
-	uiControlSetTooltip(pbar, "ProgressBar");
 	uiSpinboxOnChanged(spinbox, onSpinboxChanged, NULL);
 	uiSliderOnChanged(slider, onSliderChanged, NULL);
 	uiBoxAppend(vbox, uiControl(spinbox), 0);
@@ -151,7 +127,6 @@ static uiControl *makeNumbersPage()
 	ip = uiNewProgressBar();
 	uiProgressBarSetValue(ip, -1);
 	uiBoxAppend(vbox, uiControl(ip), 0);
-	uiControlSetTooltip(ip, "ProgressBar2");
 
 	group = uiNewGroup("Lists");
 	uiGroupSetMargined(group, 1);
@@ -166,21 +141,18 @@ static uiControl *makeNumbersPage()
 	uiComboboxAppend(cbox, "Combobox Item 2");
 	uiComboboxAppend(cbox, "Combobox Item 3");
 	uiBoxAppend(vbox, uiControl(cbox), 0);
-	uiControlSetTooltip(cbox, "Combobox");
 
 	ecbox = uiNewEditableCombobox();
 	uiEditableComboboxAppend(ecbox, "Editable Item 1");
 	uiEditableComboboxAppend(ecbox, "Editable Item 2");
 	uiEditableComboboxAppend(ecbox, "Editable Item 3");
 	uiBoxAppend(vbox, uiControl(ecbox), 0);
-	uiControlSetTooltip(ecbox, "Editable");
 
 	rb = uiNewRadioButtons();
 	uiRadioButtonsAppend(rb, "Radio Button 1");
 	uiRadioButtonsAppend(rb, "Radio Button 2");
 	uiRadioButtonsAppend(rb, "Radio Button 3");
 	uiBoxAppend(vbox, uiControl(rb), 0);
-	uiControlSetTooltip(rb, "Radio Buttons");
 
 	return uiControl(hbox);
 }
@@ -260,33 +232,22 @@ static uiControl *makeDataChoosersPage(void)
 	uiBoxSetPadded(vbox, 1);
 	uiBoxAppend(hbox, uiControl(vbox), 0);
 
-	uiDateTimePicker *dp = uiNewDatePicker();
 	uiBoxAppend(vbox,
-		uiControl(dp),
+		uiControl(uiNewDatePicker()),
 		0);
-	uiControlSetTooltip(dp, "DatePicker");
-	dp = uiNewTimePicker();
 	uiBoxAppend(vbox,
-		uiControl(dp),
+		uiControl(uiNewTimePicker()),
 		0);
-	uiControlSetTooltip(dp, "TimePicker");
-	dp = uiNewDateTimePicker();
 	uiBoxAppend(vbox,
-		uiControl(dp),
+		uiControl(uiNewDateTimePicker()),
 		0);
-	uiControlSetTooltip(dp, "DateTimePicker");
 
-	uiFontButton *fb = uiNewFontButton();
 	uiBoxAppend(vbox,
-		uiControl(fb),
+		uiControl(uiNewFontButton()),
 		0);
-	uiControlSetTooltip(fb, "FontButton");
-
-	uiColorButton *cb = uiNewColorButton();
 	uiBoxAppend(vbox,
-		uiControl(cb),
+		uiControl(uiNewColorButton()),
 		0);
-	uiControlSetTooltip(cb, "ColorButton");
 
 	uiBoxAppend(hbox,
 		uiControl(uiNewVerticalSeparator()),
@@ -301,10 +262,8 @@ static uiControl *makeDataChoosersPage(void)
 	uiBoxAppend(vbox, uiControl(grid), 0);
 
 	button = uiNewButton("  Open File  ");
-	uiControlSetTooltip(button, "Open File");
 	entry = uiNewEntry();
 	uiEntrySetReadOnly(entry, 1);
-	uiControlSetTooltip(entry, "Read Only Entry");
 	uiButtonOnClicked(button, onOpenFileClicked, entry);
 	uiGridAppend(grid, uiControl(button),
 		0, 0, 1, 1,
@@ -314,10 +273,8 @@ static uiControl *makeDataChoosersPage(void)
 		1, uiAlignFill, 0, uiAlignFill);
 
 	button = uiNewButton("Open Folder");
-	uiControlSetTooltip(button, "Open Folder");
 	entry = uiNewEntry();
 	uiEntrySetReadOnly(entry, 1);
-	uiControlSetTooltip(entry, "Read Only Entry");
 	uiButtonOnClicked(button, onOpenFolderClicked, entry);
 	uiGridAppend(grid, uiControl(button),
 		0, 1, 1, 1,
@@ -327,10 +284,8 @@ static uiControl *makeDataChoosersPage(void)
 		1, uiAlignFill, 0, uiAlignFill);
 
 	button = uiNewButton("  Save File  ");
-	uiControlSetTooltip(button, "Save File");
 	entry = uiNewEntry();
 	uiEntrySetReadOnly(entry, 1);
-	uiControlSetTooltip(entry, "Read Only Entry");
 	uiButtonOnClicked(button, onSaveFileClicked, entry);
 	uiGridAppend(grid, uiControl(button),
 		0, 2, 1, 1,
@@ -346,13 +301,11 @@ static uiControl *makeDataChoosersPage(void)
 		0, uiAlignCenter, 0, uiAlignStart);
 
 	button = uiNewButton("Message Box");
-	uiControlSetTooltip(button, "Message Box");
 	uiButtonOnClicked(button, onMsgBoxClicked, NULL);
 	uiGridAppend(msggrid, uiControl(button),
 		0, 0, 1, 1,
 		0, uiAlignFill, 0, uiAlignFill);
 	button = uiNewButton("Error Box");
-	uiControlSetTooltip(button, "Error Box");
 	uiButtonOnClicked(button, onMsgBoxErrorClicked, NULL);
 	uiGridAppend(msggrid, uiControl(button),
 		1, 0, 1, 1,

@@ -132,7 +132,9 @@ struct uiFontButton {
 	(*(b->onChanged))(b, b->onChangedData);
 }
 
-- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)panel
+// Daniel had to change this because his darling xcode blob didn't have:
+// NSFontPanelModeMask
+- (NSUInteger)validModesForFontPanel:(NSFontPanel *)panel
 {
 	return NSFontPanelFaceModeMask |
 		NSFontPanelSizeModeMask |
